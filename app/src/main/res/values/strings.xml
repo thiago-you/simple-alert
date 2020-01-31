@@ -1,3 +1,41 @@
 <resources>
-    <string name="app_name">SimpleAlert</string>
+    <!-- simple alert -->
+    <string name="success">Success</string>
+    <string name="attention">Attention</string>
+    <string name="alertMsg">Alert Description</string>
+    <string name="alertProgress">0%</string>
+    <string name="alertExtras">Alert extra message</string>
+    <string name="icon_alert_desc">Alert Representation Icon</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_confirm">Confirm</string>
+    <string name="default_confirm_error_btn_title">Close</string>
+    <string name="fmt_btn_show_extras">&lt;u>Show Extras&lt;/u></string>
+    <string name="fmt_btn_hide_extras">&lt;u>Hide Extras&lt;/u></string>
+
+    <!-- progress dialog -->
+    <string name="loading">Loading…</string>
+
+    <!-- loading msg -->
+    <string name="loading_status">Loading…</string>
+    <string name="initial_status">Preparing data…</string>
+    <string name="processing_status">Preparing data…</string>
+    <string name="sending_status">Sending data…</string>
+    <string name="processing_return_status">Processing return…</string>
+    <string name="saving_status">Saving data…</string>
+    <string name="finishing_status">Finishing…</string>
+    <string name="loading_list">Loading list…</string>
+
+    <!-- interpolated loading msg -->
+    <string name="int_loading_status">%1$d%% &#160;&#160;Loading…</string>
+    <string name="int_initial_status">%1$d%% &#160;&#160;Preparing request…</string>
+    <string name="int_processing_status">%1$d%% &#160;&#160;Preparing data…</string>
+    <string name="int_sending_status">%1$d%% &#160;&#160;Sending data…</string>
+    <string name="int_processing_return_status">%1$d%% &#160;&#160;Processing return…</string>
+    <string name="int_saving_status">%1$d%% &#160;&#160;Saving data…</string>
+    <string name="int_finishing_status">%1$d%% &#160;&#160;Finishing…</string>
+    <string name="int_loading_list">%1$d%% &#160;&#160;Loading listing…</string>
+
+    <!-- permission messages -->
+    <string name="overlay_permission_msg">To App work properly you must grant permission to appear on other apps.</string>
+    <string name="btn_open_config">Open Config</string>
 </resources>

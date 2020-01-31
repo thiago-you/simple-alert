@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorSecondary">#03dac6</color>
+    <color name="textColor">#373d3f</color>
+    <color name="textWhite">#fefefe</color>
+
+    <!-- alert colors -->
+    <color name="alert_btn_confirm">#0645AD</color>
+    <color name="alert_btn_cancel">#BA0000</color>
+    <color name="alert_success_bg">#00897B</color>
+    <color name="alert_info_bg">#1E88E5</color>
+    <color name="alert_error_bg">#d50000</color>
+    <color name="alert_warning_bg">#F9A825</color>
+    <color name="alert_system_primary">#008577</color>
+    <color name="alert_color_dark">#373d3f</color>
+
+    <!-- loading colors -->
+    <color name="alert_loading_end">#03dac6</color>
+    <color name="alert_loading_center">#8A018786</color>
+    <color name="alert_loading_start">#0A018786</color>
 </resources>
