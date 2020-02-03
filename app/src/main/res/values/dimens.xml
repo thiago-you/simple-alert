@@ -1,0 +1,4 @@
+<resources>
+    <!-- Dynamic ScrollView component -->
+    <dimen name="default_scroll_max_height">500dp</dimen>
+</resources>
