@@ -144,17 +144,17 @@ public class Loading {
             message = staticMessage;
         } else {
             if (progress >= 100) {
-                message = activity.getString(R.string.int_finishing_status);
+                message = activity.getString(R.string.finishing_status);
             } else if (progress >= 90) {
-                message = activity.getString(R.string.int_saving_status);
+                message = activity.getString(R.string.saving_status);
             }  else if (progress >= 80) {
-                message = activity.getString(R.string.int_processing_return_status);
+                message = activity.getString(R.string.processing_return_status);
             } else if (progress >= 30) {
-                message = activity.getString(R.string.int_sending_status);
+                message = activity.getString(R.string.sending_status);
             } else if (progress >= 10) {
-                message = activity.getString(R.string.int_processing_status);
+                message = activity.getString(R.string.processing_status);
             } else if (progress >= 0) {
-                message = activity.getString(R.string.int_initial_status);
+                message = activity.getString(R.string.initial_status);
             }
         }
 

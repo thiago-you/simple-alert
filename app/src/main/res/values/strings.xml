@@ -25,17 +25,4 @@
     <string name="finishing_status">Finishing…</string>
     <string name="loading_list">Loading list…</string>
 
-    <!-- interpolated loading msg -->
-    <string name="int_loading_status">%1$d%% &#160;&#160;Loading…</string>
-    <string name="int_initial_status">%1$d%% &#160;&#160;Preparing request…</string>
-    <string name="int_processing_status">%1$d%% &#160;&#160;Preparing data…</string>
-    <string name="int_sending_status">%1$d%% &#160;&#160;Sending data…</string>
-    <string name="int_processing_return_status">%1$d%% &#160;&#160;Processing return…</string>
-    <string name="int_saving_status">%1$d%% &#160;&#160;Saving data…</string>
-    <string name="int_finishing_status">%1$d%% &#160;&#160;Finishing…</string>
-    <string name="int_loading_list">%1$d%% &#160;&#160;Loading listing…</string>
-
-    <!-- permission messages -->
-    <string name="overlay_permission_msg">To App work properly you must grant permission to appear on other apps.</string>
-    <string name="btn_open_config">Open Config</string>
 </resources>
