@@ -8,15 +8,15 @@ Alerts can use normal, clean and system style and show cancel button when needed
 ### SAMPLE
 ![simple alert](sample/alert-1.jpg?raw=true "Simple Alert")
 
-![dialog loading](sample/alert-2?raw=true "Dialog Loading")
+![dialog loading](sample/alert-2.jpg?raw=true "Dialog Loading")
 
-![spinner loading](sample/alert-6?raw=true "Spinner Loading")
+![spinner loading](sample/alert-6.jpg?raw=true "Spinner Loading")
 
-![info alert](sample/alert-5?raw=true "Info Alert")
+![info alert](sample/alert-5.jpg?raw=true "Info Alert")
 
-![error alert](sample/alert-7?raw=true "Error Alert")
+![error alert](sample/alert-7.jpg?raw=true "Error Alert")
 
-![error alert with log](sample/alert-8?raw=true "Error Alert with Log")
+![error alert with log](sample/alert-8.jpg?raw=true "Error Alert with Log")
 
 More samples can be found into /sample folder.
 
