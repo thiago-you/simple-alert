@@ -41,6 +41,7 @@ More samples can be found into /sample folder.
         .setType(SimpleAlert.ERROR) // change alert color type
         .setMessage("Hi, i'm showing error into a pretty way!")
         .setExtras(Log.getStackTraceString(e)) // or your log string
+        .showCancel() // display default cancel button
         .setConfirmClickListener(new SimpleAlert.OnSimpleAlertClickListener() {
             @Override
             public void onClick(SimpleAlert simpleAlert) {
@@ -52,16 +53,7 @@ More samples can be found into /sample folder.
 
     // show alert with another style
     new SimpleAlert(context, SimpleAlert.STYLE_SYSTEM)
-        .setType(SimpleAlert.ERROR)
-        .setMessage("Hi, i'm showing error into a pretty way!")
-        .setExtras(Log.getStackTraceString(e)) // or your log string
-        .setConfirmClickListener(new SimpleAlert.OnSimpleAlertClickListener() {
-            @Override
-            public void onClick(SimpleAlert simpleAlert) {
-                // your code
-                simpleAlert.dismiss();
-            }
-        })
+        .setMessage("Hi, i'm showing a system alert!")
         .show();
 
 ### Requirements
