@@ -16,8 +16,6 @@ Alerts can use normal, clean and system style and show cancel button when needed
 
 ![error alert](sample/alert-7.jpg?raw=true "Error Alert")
 
-![error alert with log](sample/alert-8.jpg?raw=true "Error Alert with Log")
-
 More samples can be found into /sample folder.
 
 ### USAGE DEMO
