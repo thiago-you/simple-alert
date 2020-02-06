@@ -3,7 +3,7 @@ An easy and useful alert dialog. The library has a lot of simple and custom feat
 
 Loadings (dialog or spinner) can implements a dismiss callback listener, that will execute only after the dialog dismiss.
 
-Alerts can use normal, clean and system style and show cancel button when needed. All texts, titles, button titles and actions can be customized. Layout can be overridden to use your own requirements.
+Alerts can use normal, clean and system style and show cancel button when needed. All texts, titles, button titles and actions can be customized. Layout can also be overridden to use your own requirements.
 
 ### SAMPLE
 ![info alert](sample/alert-2.jpg?raw=true "Info Alert") ![error alert](sample/alert-7.jpg?raw=true "Error Alert")
@@ -19,19 +19,39 @@ More samples can be found into /sample folder.
         .show();
 
     // show dialog loading
-    new Loading.Dialog(MainActivity.this)
+    new Loading.Dialog(context)
         .setStaticMessage("Loading...")
         .updateProgress(0, 100)
         .show();
 
-    // show spinner loading
-    new Loading.Spinner(MainActivity.this)
+    // show spinner loading with dismiss listener
+    new Loading.Spinner(context)
         .setStaticMessage("Loading...")
         .updateProgress(0, 100)
+        .setDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                // your code
+            }
+        })
         .show();
 
     // show logs and confirm listener
-    new SimpleAlert(MainActivity.this)
+    new SimpleAlert(context)
+        .setType(SimpleAlert.ERROR) // change alert color type
+        .setMessage("Hi, i'm showing error into a pretty way!")
+        .setExtras(Log.getStackTraceString(e)) // or your log string
+        .setConfirmClickListener(new SimpleAlert.OnSimpleAlertClickListener() {
+            @Override
+            public void onClick(SimpleAlert simpleAlert) {
+                // your code
+                simpleAlert.dismiss();
+            }
+        })
+        .show();
+
+    // show alert with another style
+    new SimpleAlert(context, SimpleAlert.STYLE_SYSTEM)
         .setType(SimpleAlert.ERROR)
         .setMessage("Hi, i'm showing error into a pretty way!")
         .setExtras(Log.getStackTraceString(e)) // or your log string
