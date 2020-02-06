@@ -6,11 +6,9 @@ Loadings (dialog or spinner) can implements a dismiss callback listener, that wi
 Alerts can use normal, clean and system style and show cancel button when needed. All texts, titles, button titles and actions can be customized. Layout can be overridden to use your own requirements.
 
 ### SAMPLE
-![simple alert](sample/alert-1.jpg?raw=true "Simple Alert") ![info alert](sample/alert-5.jpg?raw=true "Info Alert")
+![info alert](sample/alert-5.jpg?raw=true "Info Alert") ![error alert](sample/alert-7.jpg?raw=true "Error Alert")
 
 ![dialog loading](sample/alert-2.jpg?raw=true "Dialog Loading") ![spinner loading](sample/alert-6.jpg?raw=true "Spinner Loading")
-
-![error alert](sample/alert-7.jpg?raw=true "Error Alert")
 
 More samples can be found into /sample folder.
 
