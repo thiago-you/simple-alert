@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.HtmlCompat;
 
 @SuppressWarnings("unused WeakerAccess UnusedReturnValue")
 public class SimpleAlert implements View.OnClickListener {
@@ -224,7 +224,7 @@ public class SimpleAlert implements View.OnClickListener {
 
             /* show btn */
             btnShowExtras.setVisibility(View.VISIBLE);
-            btnShowExtras.setText(Html.fromHtml(context.getString(R.string.fmt_btn_show_extras)));
+            btnShowExtras.setText(HtmlCompat.fromHtml(context.getString(R.string.fmt_btn_show_extras), HtmlCompat.FROM_HTML_MODE_LEGACY));
         }
 
         return this;
@@ -511,11 +511,11 @@ public class SimpleAlert implements View.OnClickListener {
                 if (txtExtras.getVisibility() == View.VISIBLE) {
                     viewDivider.setVisibility(View.GONE);
                     txtExtras.setVisibility(View.GONE);
-                    btnShowExtras.setText(Html.fromHtml(context.getString(R.string.fmt_btn_show_extras)));
+                    btnShowExtras.setText(HtmlCompat.fromHtml(context.getString(R.string.fmt_btn_show_extras), HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else {
                     viewDivider.setVisibility(View.VISIBLE);
                     txtExtras.setVisibility(View.VISIBLE);
-                    btnShowExtras.setText(Html.fromHtml(context.getString(R.string.fmt_btn_hide_extras)));
+                    btnShowExtras.setText(HtmlCompat.fromHtml(context.getString(R.string.fmt_btn_hide_extras), HtmlCompat.FROM_HTML_MODE_LEGACY));
                 }
             }
         }
