@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/alert_light">
 
-        <you.thiago.simplealert.DynamicScrollView
+       <you.thiago.simplealert.DynamicScrollView
             android:id="@+id/containerContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </you.thiago.simplealert.DynamicScrollView>
+       </you.thiago.simplealert.DynamicScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

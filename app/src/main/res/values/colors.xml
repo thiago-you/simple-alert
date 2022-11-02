@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorSecondary">#03dac6</color>
-    <color name="textColor">#373d3f</color>
-    <color name="textWhite">#fefefe</color>
+    <color name="color_secondary">#03dac6</color>
+    <color name="text_white">#fefefe</color>
+
+    <color name="text">#373d3f</color>
+    <color name="text_dark">#131516</color>
 
     <!-- alert colors -->
-    <color name="alert_btn_confirm">#0645AD</color>
+    <color name="alert_btn">#1F51FF</color>
+    <color name="alert_btn_confirm">#1F51FF</color>
     <color name="alert_btn_cancel">#BA0000</color>
     <color name="alert_success_bg">#00897B</color>
     <color name="alert_info_bg">#1E88E5</color>

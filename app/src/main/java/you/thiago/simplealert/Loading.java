@@ -1,53 +1,53 @@
 package you.thiago.simplealert;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import java.util.Locale;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "WeakerAccess"})
 public class Loading {
 
-    protected Activity activity;
+    public static final int LENGTH_SHORT = 4000;
+    public static final int LENGTH_LONG = 7000;
+
+    private Context context;
     protected SimpleAlert dialog;
 
-    protected String message;
-    private String staticMessage;
-    private boolean disableProgress;
+    private String message;
+    private String loadingMessage;
+
+    private boolean enableProgress;
+    private boolean autoUpdateMessage;
 
     private Thread progressThread;
+    private MessageUpdate messageUpdate;
+
+    protected boolean isSleeper = false;
 
     /**
      * Private instance
      */
     private Loading() {
-
+        // ...
     }
 
-    private Loading(Activity activity) {
-        this.activity = activity;
-
-        /* create alert instance */
-        dialog = new SimpleAlert(activity, SimpleAlert.STYLE_LOADING).setMessage(activity.getString(R.string.loading));
+    private Loading(Context context) {
+        this.context = context;
+        dialog = new SimpleAlert(context, SimpleAlert.STYLE_LOADING).setMessage(R.string.loading);
     }
 
-    /**
-     * Set a static dialog message
-     */
-    public Loading setStaticMessage(String message) {
-        if (message != null && (this.message == null || !this.message.equals(message))) {
-            dialog.setMessage(message);
-        }
-
-        staticMessage = message;
-        return this;
+    public Loading setMessage(int stringRes) {
+        return setMessage(context.getString(stringRes));
     }
 
-    /**
-     * Update dialog message if has not static msg set
-     */
     public Loading setMessage(String message) {
         if (message != null && (this.message == null || !this.message.equals(message))) {
             dialog.setMessage(message);
@@ -62,9 +62,51 @@ public class Loading {
     }
 
     public Loading disableProgress() {
-        disableProgress = true;
-        dialog.hideSpinnerProgress();
+        enableProgress = false;
         return this;
+    }
+
+    public Loading enableProgress() {
+        enableProgress = true;
+        dialog.showSpinnerProgress();
+        return this;
+    }
+
+    public Loading disableAutoUpdate() {
+        autoUpdateMessage = false;
+        return this;
+    }
+
+    public Loading enableAutoUpdate() {
+        autoUpdateMessage = true;
+        return this;
+    }
+
+    public Loading initProgress(int actualProgress) {
+        startProgressThread(this, actualProgress, 100);
+        return this;
+    }
+
+    public Loading setDelay(int milliDelay) {
+        return initProgress(getProgressFromDelay(milliDelay));
+    }
+
+    public int getProgressFromDelay(int milliDelay) {
+        if (milliDelay >= 10000) {
+            return 0;
+        }
+        if (milliDelay <= 0) {
+            return 90;
+        }
+
+        double maxProgress = 100.00;
+        double progress = (maxProgress - ((((double) milliDelay) / 10000) * maxProgress));
+
+        if (progress <= 0) {
+            progress = 90;
+        }
+
+        return (int) progress;
     }
 
     public Loading updateProgress(int actualProgress, int maxProgress) {
@@ -83,13 +125,16 @@ public class Loading {
     }
 
     public Loading setCancelListener(DialogInterface.OnCancelListener cancelListener) {
-        dialog.setCancelListener(cancelListener);
+        dialog.setOnCancelListener(cancelListener);
         return this;
     }
 
     public Loading setDismissListener(DialogInterface.OnDismissListener dismissListener) {
-        /* set finish progress */
-        updateProgress(99, 100);
+        return setDismissListener(99, dismissListener);
+    }
+
+    public Loading setDismissListener(int fromProgress, DialogInterface.OnDismissListener dismissListener) {
+        updateProgress(fromProgress, 100);
 
         dialog.setDismissListener(dismissListener);
         return this;
@@ -100,18 +145,23 @@ public class Loading {
         return this;
     }
 
+    public Loading preventDismiss() {
+        dialog.preventDismiss();
+        return this;
+    }
+
     public Loading setCancelable(boolean cancel) {
         dialog.setCancelable(cancel);
         return this;
     }
 
-    public Loading setLightColor() {
-        dialog.setLightColor();
+    public Loading setLightMode() {
+        dialog.setLightMode();
         return this;
     }
 
-    public Loading setDarkColor() {
-        dialog.setDarkColor();
+    public Loading setDarkMode() {
+        dialog.setDarkMode();
         return this;
     }
 
@@ -120,8 +170,23 @@ public class Loading {
         return this;
     }
 
-    public Loading setBackgroundColor(Drawable background) {
-        dialog.setBackgroundColor(background);
+    public Loading setBackgroundColor(int color) {
+        dialog.setBackgroundColor(color);
+        return this;
+    }
+
+    public Loading setBackground(Drawable background) {
+        dialog.setBackground(background);
+        return this;
+    }
+
+    public Loading setDismissTimeout(int dismissTime) {
+        dialog.setDismissTimeout(dismissTime);
+        return this;
+    }
+
+    public Loading setMessageUpdate(MessageUpdate messageUpdate) {
+        this.messageUpdate = messageUpdate;
         return this;
     }
 
@@ -139,37 +204,50 @@ public class Loading {
     }
 
     private void updateLoadingMessage(int progress) {
-        String message = "";
-        if (staticMessage != null) {
-            message = staticMessage;
-        } else {
+        String message = this.message != null ? this.message : "";
+
+        if (messageUpdate != null) {
+            message = messageUpdate.getMessage(progress);
+        } else if (autoUpdateMessage) {
             if (progress >= 100) {
-                message = activity.getString(R.string.finishing_status);
+                message = context.getString(R.string.finishing_status);
             } else if (progress >= 90) {
-                message = activity.getString(R.string.saving_status);
+                message = context.getString(R.string.saving_status);
             }  else if (progress >= 80) {
-                message = activity.getString(R.string.processing_return_status);
+                message = context.getString(R.string.processing_return_status);
             } else if (progress >= 30) {
-                message = activity.getString(R.string.sending_status);
+                message = context.getString(R.string.sending_status);
             } else if (progress >= 10) {
-                message = activity.getString(R.string.processing_status);
+                message = context.getString(R.string.processing_status);
             } else if (progress >= 0) {
-                message = activity.getString(R.string.initial_status);
+                message = context.getString(R.string.initial_status);
             }
         }
 
         if (this instanceof Spinner) {
             setMessage(message);
 
-            if (!disableProgress) {
+            if (enableProgress) {
                 dialog.setProgress(progress + "%");
             }
         } else {
-            if (disableProgress) {
-                setMessage(message);
+            if (enableProgress) {
+                if (loadingMessage == null) {
+                    loadingMessage = message;
+                }
+
+                setMessage(String.format(Locale.getDefault(), "%d%% %s", progress, loadingMessage));
             } else {
-                setMessage(String.format(Locale.getDefault(), "%d%% %s", progress, message));
+                setMessage(message);
             }
+        }
+    }
+    /**
+     * Stop Thread to update progress
+     */
+    public void stopProgressThread() {
+        if (progressThread != null) {
+            progressThread.interrupt();
         }
     }
 
@@ -177,7 +255,6 @@ public class Loading {
      * Thread to update progress
      */
     private void startProgressThread(final Loading loading, final int actualProgress, final int maxProgress) {
-        /* stop old thread */
         if (progressThread != null) {
             progressThread.interrupt();
         }
@@ -195,14 +272,7 @@ public class Loading {
                                 return;
                             }
 
-                            /* update dialog progress in UI Thread */
-                            final int progress = i;
-                            activity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    loading.setProgress(progress);
-                                }
-                            });
+                            loading.setProgress(i);
 
                             /* wait for interface animations */
                             Thread.sleep(100);
@@ -222,7 +292,6 @@ public class Loading {
             }
         };
 
-        /* run thread */
         progressThread.start();
     }
 
@@ -230,12 +299,24 @@ public class Loading {
      * Loading with dialog style
      */
     public static class Dialog extends Loading {
+        public Dialog(Context context) {
+            super(context);
 
-        public Dialog(Activity activity) {
-            super(activity);
+            dialog = new SimpleAlert(context, SimpleAlert.STYLE_LOADING)
+                    .setLightMode()
+                    .preventDismiss()
+                    .setMessage(R.string.loading);
+        }
 
-            /* create loading instance */
-            dialog = new SimpleAlert(activity, SimpleAlert.STYLE_LOADING).setMessage(activity.getString(R.string.loading));
+        public Dialog(Context context, int delay) {
+            super(context);
+
+            dialog = new SimpleAlert(context, SimpleAlert.STYLE_LOADING)
+                    .setLightMode()
+                    .preventDismiss()
+                    .setMessage(R.string.loading);
+
+            setDelay(delay);
         }
     }
 
@@ -243,17 +324,58 @@ public class Loading {
      * Loading with Spinner style
      */
     public static class Spinner extends Loading {
+        public Spinner(Context context) {
+            super(context);
 
-        private int progress;
-
-        public Spinner(Activity activity) {
-            super(activity);
-
-            /* create loading instance */
-            dialog = new SimpleAlert(activity, SimpleAlert.STYLE_SPINNER_LOADING);
-
-            /* config default spinner color to light */
-            dialog.setLightColor();
+            dialog = new SimpleAlert(context, SimpleAlert.STYLE_SPINNER_LOADING)
+                    .setDarkMode()
+                    .preventDismiss();
         }
+
+        public Spinner(Context context, int delay) {
+            super(context);
+
+            dialog = new SimpleAlert(context, SimpleAlert.STYLE_SPINNER_LOADING)
+                    .setDarkMode()
+                    .preventDismiss();
+
+            setDelay(delay);
+        }
+    }
+
+    /**
+     * Loading invisible with only progress thread
+     */
+    public static class Sleeper extends Loading {
+
+        private Runnable action;
+
+        public Sleeper(Context context) {
+            super(context);
+            isSleeper = true;
+        }
+
+        public Sleeper init(int progress) {
+            initProgress(progress);
+            return this;
+        }
+
+        public Sleeper setAction(@Nullable Runnable action) {
+            this.action = action;
+            return this;
+        }
+
+        @Override
+        public void dismiss() {
+            if (dialog.getContext() instanceof Activity) {
+                ((Activity) dialog.getContext()).runOnUiThread(action);
+            } else {
+                new Handler(Looper.getMainLooper()).post(action);
+            }
+        }
+    }
+
+    public interface MessageUpdate {
+        String getMessage(int progress);
     }
 }

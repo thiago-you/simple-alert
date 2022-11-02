@@ -35,4 +35,20 @@
         <item name="android:maxHeight">180dip</item>
     </style>
 
+    <style name="AlertDialog.Button" parent="android:style/ButtonBar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:textColor">@color/alert_btn</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="AlertDialog.Button.Cancel" parent="AlertDialog.Button">
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

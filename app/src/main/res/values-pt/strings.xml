@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- simple alert -->
+    <string name="success">Sucesso</string>
+    <string name="attention">Atenção</string>
+    <string name="alertMsg">Descrição do alerta</string>
+    <string name="message">Mensagem</string>
+    <string name="alertProgress">0%</string>
+    <string name="icon_alert_desc">Ícone de representação do alerta</string>
+    <string name="alertExtras">Detalhes do alerta</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_confirm">Confirmar</string>
+    <string name="btn_close">Fechar</string>
+    <string name="default_confirm_error_btn_title">Fechar</string>
+    <string name="fmt_btn_show_extras">&lt;u>Exibir Detalhes&lt;/u></string>
+    <string name="fmt_btn_show_message"><![CDATA[<u>Ver mais…</u>]]></string>
+    <string name="fmt_btn_hide_extras">&lt;u>Ocultar Detalhes&lt;/u></string>
+    <string name="alert_demo_text">Simple Alert styles demonstration!</string>
+    <string name="alert_inflater_error">Invalid view inflater on Alert Dialog.</string>
+    <string name="long_message">%s…</string>
+
+    <!-- progress dialog -->
+    <string name="loading">Carregando…</string>
+
+    <!-- loading msg -->
+    <string name="loading_status">Carregando…</string>
+    <string name="initial_status">Preparando requisição…</string>
+    <string name="processing_status">Preparando dados…</string>
+    <string name="sending_status">Enviando dados…</string>
+    <string name="processing_return_status">Processando retorno…</string>
+    <string name="saving_status">Salvando dados…</string>
+    <string name="finishing_status">Finalizando…</string>
+    <string name="loading_list">Sincronizando listagem…</string>
+</resources>
